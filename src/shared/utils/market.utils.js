@@ -22,11 +22,19 @@ export const getMarketProductBadge = (product) => {
   if (!product) return null;
 
   if (Number(product.quantity) <= 0) {
-    return { label: "Qolmagan", type: "neutral" };
+    return {
+      label: "Qolmagan",
+      type: "neutral",
+      className: "bg-gray-200 text-gray-800",
+    };
   }
 
   if (isNewMarketProduct(product.createdAt)) {
-    return { label: "Yangi", type: "primary" };
+    return {
+      label: "Yangi",
+      type: "primary",
+      className: "bg-green-100 text-green-700",
+    };
   }
 
   return null;
