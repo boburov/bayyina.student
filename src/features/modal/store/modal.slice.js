@@ -6,6 +6,8 @@ const initialModalData = { isOpen: false, data: {}, isLoading: false };
 // Initial state
 const initialState = {
   profile: initialModalData,
+  marketOrder: initialModalData,
+  cancelMarketOrder: initialModalData,
 };
 
 export const modalSlice = createSlice({
