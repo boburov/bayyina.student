@@ -9,6 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 
 // API
 import { marketAPI } from "@/features/market/api/market.api";
+import { authAPI } from "@/features/auth/api/auth.api";
 
 // Components
 import Card from "@/shared/components/ui/Card";
@@ -23,6 +24,11 @@ import MarketOrderModal from "@/features/market/components/MarketOrderModal";
 const MarketProductDetailPage = () => {
   const { openModal } = useModal();
   const { productId } = useParams();
+
+  const { data: me } = useQuery({
+    queryKey: ["auth", "me"],
+    queryFn: () => authAPI.getMe().then((res) => res.data.data),
+  });
 
   const { data: product, isLoading } = useQuery({
     queryKey: ["market", "product", productId],
@@ -76,13 +82,25 @@ const MarketProductDetailPage = () => {
             </p>
 
             {/* Create Order Button */}
-            <Button
-              className="w-full"
-              disabled={product.quantity < 1}
-              onClick={() => openModal("marketOrder", { product })}
-            >
-              Buyurtma berish
-            </Button>
+            {me?.penaltyPoints > 3 ? (
+              <div className="space-y-2">
+                <p className="text-sm text-red-600 text-center">
+                  Jarima balingiz 3 dan yuqori bo'lgani uchun buyurtma bera
+                  olmaysiz.
+                </p>
+                <Button className="w-full" disabled>
+                  Buyurtma berish
+                </Button>
+              </div>
+            ) : (
+              <Button
+                className="w-full"
+                disabled={product.quantity < 1}
+                onClick={() => openModal("marketOrder", { product })}
+              >
+                Buyurtma berish
+              </Button>
+            )}
           </div>
         )}
       </div>
