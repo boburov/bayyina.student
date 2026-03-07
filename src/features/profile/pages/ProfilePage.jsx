@@ -72,6 +72,15 @@ const ProfilePage = () => {
                   {profile?.username || "-"}
                 </span>
               </div>
+
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-gray-500">Jarima bali</span>
+                <span
+                  className={`font-medium ${profile?.penaltyPoints > 0 ? "text-red-600" : "text-green-600"}`}
+                >
+                  {profile?.penaltyPoints || 0}
+                </span>
+              </div>
             </Card>
 
             <Card title="Sinflar" className="space-y-3">
