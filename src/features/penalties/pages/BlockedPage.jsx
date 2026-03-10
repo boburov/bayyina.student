@@ -25,7 +25,7 @@ const BlockedPage = () => {
   const fineAmount = settings?.studentFineAmount;
 
   const logout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("authToken");
     window.location.href = "/login";
   };
 

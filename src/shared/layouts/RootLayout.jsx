@@ -15,7 +15,7 @@ const RootLayout = () => {
     queryKey: ["auth", "me"],
     queryFn: () => authAPI.getMe().then((res) => res.data.data),
     staleTime: 5 * 60 * 1000,
-    enabled: Boolean(localStorage.getItem("token")),
+    enabled: Boolean(localStorage.getItem("authToken")),
   });
 
   if (user?.penaltyPoints >= 12) {

@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 
 const HomePage = () => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("authToken");
 
   if (token) {
     return <Navigate to="/dashboard" replace />;
