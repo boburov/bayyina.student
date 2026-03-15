@@ -10,7 +10,6 @@ import { authAPI } from "@/features/auth/api/auth.api";
 
 // Components
 import Card from "@/shared/components/ui/Card";
-import BottomNavbar from "@/shared/components/ui/BottomNavbar";
 import BackHeader from "@/shared/components/layout/BackHeader";
 
 // Data
@@ -155,8 +154,6 @@ const MyPenaltiesPage = () => {
           </div>
         )}
       </div>
-
-      <BottomNavbar />
     </div>
   );
 };

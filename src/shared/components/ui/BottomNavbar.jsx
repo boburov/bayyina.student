@@ -11,7 +11,6 @@ const BottomNavbar = () => {
   const navItems = [
     { path: "/dashboard", label: "Asosiy", icon: Home },
     { path: "/market", label: "Do'kon", icon: Store },
-    { path: "/penalties", label: "Jarimalar", icon: AlertTriangle },
     { path: "/transactions", label: "Tangalar", icon: Coins },
     { path: "/profile", label: "Profil", icon: User },
   ];
