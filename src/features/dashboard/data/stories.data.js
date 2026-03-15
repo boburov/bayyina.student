@@ -1,5 +1,20 @@
 const stories = [
   {
+    id: 1321,
+    name: "O'yinlar",
+    description: "Aqlni charxlab turish uchun mantiqiy o'yinlar",
+    image: "https://fullcircletoysandgames.com/wp-content/uploads/2022/11/AdobeStock_506943868-scaled.jpeg",
+    previewImage: "https://media.istockphoto.com/id/1560833158/photo/game-controller-with-purple-lit-keyboard-amidst-various-wireless-devices.jpg?s=612x612&w=0&k=20&c=eOYotPVhXSiFkrSLHsDjpUENG3ev7bnbt-iK6RS6KAM=",
+  },
+  {
+    id: 23,
+    name: "Jarimalar",
+    description:
+      "O'quvchi maktab qoidlarini buzganida beriladigan jarima tizimi",
+    image: "https://www.kothes.com/hubfs/9%20Newsletter/2022/Safe%20Methode_960-792.jpg",
+    previewImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT95Ca7NhofNVzAECOFQJ2bri_9FufnRvP_Cg&s",
+  },
+  {
     id: 1,
     name: "Dizayn",
     description:
