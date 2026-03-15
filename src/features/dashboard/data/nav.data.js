@@ -1,31 +1,23 @@
 // Icons
-import { FileText, Settings, Wrench } from "lucide-react";
+import { Gamepad2, TriangleAlert } from "lucide-react";
 
-const navItems = [
+const topNavItems = [
   {
-    to: "/requests",
-    label: "Murojaatlar",
-    description: "Ariza va murojaatlaringizni yuborin",
-    icon: FileText,
-    gradientFrom: "from-blue-400",
-    gradientTo: "to-blue-700",
+    to: "/penalties",
+    label: "Jarimalar",
+    description: "Jarimalaringizni ko'rish uchun",
+    icon: TriangleAlert,
+    gradientFrom: "from-orange-400",
+    gradientTo: "to-orange-700",
   },
   {
-    to: "/services",
-    label: "Xizmatlar",
-    description: "Kundalik xizmatlar holati",
-    icon: Settings,
+    to: "/games",
+    label: "O'yinlar",
+    description: "Aqlingizni chiniqtirish uchun",
+    icon: Gamepad2,
     gradientFrom: "from-emerald-400",
     gradientTo: "to-green-700",
   },
-  {
-    to: "/msk",
-    label: "MSK",
-    description: "Mahalla servis kompaniyasi",
-    icon: Wrench,
-    gradientFrom: "from-orange-400",
-    gradientTo: "to-amber-700",
-  },
 ];
 
-export default navItems;
+export { topNavItems };

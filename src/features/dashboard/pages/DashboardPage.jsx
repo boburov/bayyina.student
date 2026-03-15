@@ -1,4 +1,8 @@
+// Data
+import { topNavItems } from "../data/nav.data";
+
 // Components
+import List from "@/shared/components/ui/List";
 import WeeklyStats from "../components/WeeklyStats";
 import StoriesPanel from "../components/StoriesPanel";
 import BottomNavbar from "@/shared/components/ui/BottomNavbar";
@@ -12,6 +16,17 @@ const DashboardPage = () => {
 
         {/* Stories Panel */}
         <StoriesPanel />
+
+        <List
+          items={topNavItems.map((item) => ({
+            to: item.to,
+            icon: item.icon,
+            title: item.label,
+            gradientTo: item.gradientTo,
+            description: item.description,
+            gradientFrom: item.gradientFrom,
+          }))}
+        />
 
         {/* Student Weekly Stats */}
         <WeeklyStats />
