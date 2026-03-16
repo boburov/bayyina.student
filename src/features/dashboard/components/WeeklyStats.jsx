@@ -1,12 +1,14 @@
 // TanStack Query
 import { useQuery } from "@tanstack/react-query";
 
+// Icons
+import { Users, Award, BarChart2 } from "lucide-react";
+
 // Components
 import Card from "@/shared/components/ui/Card";
+import List from "@/shared/components/ui/List";
+import Counter from "@/shared/components/ui/Counter";
 import LoaderCard from "@/shared/components/ui/LoaderCard";
-
-// Icons
-import { Users, Award, School, BarChart2 } from "lucide-react";
 
 // API
 import { authAPI } from "@/features/auth/api/auth.api";
@@ -29,14 +31,7 @@ const WeeklyStats = () => {
   });
 
   // Loading
-  if (isLoading) {
-    return (
-      <div className="space-y-5">
-        <LoaderCard className="h-96" />
-        <LoaderCard className="h-96" />
-      </div>
-    );
-  }
+  if (isLoading) return <LoaderCard className="h-96" />;
 
   // Error
   if (isError || !data) return null;
@@ -46,66 +41,68 @@ const WeeklyStats = () => {
   // Content
   return (
     <div className="space-y-5">
-      <Card title="Reyting" className="space-y-4 xs:space-y-5">
-        <div className="flex items-center justify-between bg-green-50 p-4 rounded-lg border border-green-200">
-          <div className="flex items-center gap-2">
-            <Award className="size-5 text-green-600" />
-            <h4 className="text-sm font-medium text-gray-700 sm:text-base">
-              Umumiy Ball
-            </h4>
-          </div>
+      <h2 className="text-lg font-semibold">Haftalik statistika</h2>
 
-          <p className="font-semibold text-green-600 xs:text-lg sm:font-bold sm:text-xl md:text-2xl lg:text-3xl">
-            {simpleStats?.totalSum ?? 0}
-          </p>
-        </div>
+      <List
+        items={[
+          {
+            icon: Award,
+            gradientTo: "to-lime-700",
+            title: "Umumiy Ball",
+            gradientFrom: "from-lime-300",
+            trailing: (
+              <Counter
+                value={123 ?? simpleStats?.totalSum ?? 0}
+                className="font-semibold text-lime-600 xs:text-lg sm:font-bold sm:text-xl md:text-2xl"
+              />
+            ),
+          },
+          {
+            icon: BarChart2,
+            gradientTo: "to-emerald-700",
+            title: "Jami Baholar",
+            gradientFrom: "from-emerald-300",
+            trailing: (
+              <Counter
+                value={32 ?? simpleStats?.totalGrades ?? 0}
+                className="font-semibold text-emerald-600 xs:text-lg sm:font-bold sm:text-xl md:text-2xl"
+              />
+            ),
+          },
+        ]}
+      />
 
-        <div className="flex items-center justify-between bg-blue-50 p-4 rounded-lg border border-blue-200">
-          <div className="flex items-center gap-2">
-            <BarChart2 className="size-5 text-blue-600" />
-            <h4 className="text-sm font-medium text-gray-700 sm:text-base">
-              Jami Baholar
-            </h4>
-          </div>
-
-          <p className="font-semibold text-blue-600 xs:text-lg sm:font-bold sm:text-xl md:text-2xl lg:text-3xl">
-            {simpleStats?.totalGrades ?? 0}
-          </p>
-        </div>
-
-        {rankings?.schoolRank && (
-          <div className="flex items-center justify-between p-4 rounded-lg border">
-            <div className="flex items-center gap-2">
-              <School className="size-5 text-purple-600" />
-              <h4 className="text-sm font-medium text-gray-700 sm:text-base">
-                Maktabdagi reyting
-              </h4>
-            </div>
-
-            <p className="font-semibold text-purple-600 xs:text-lg sm:font-bold sm:text-xl md:text-2xl lg:text-3xl">
-              {rankings.schoolRank} / {rankings.schoolTotalStudents}
-            </p>
-          </div>
-        )}
-
-        {rankings?.classRanks?.map((classRank) => (
-          <div
-            key={classRank.class?._id || classRank.class?.name}
-            className="flex items-center justify-between p-4 rounded-lg border"
-          >
-            <div className="flex items-center gap-2">
-              <Users className="size-5 text-purple-600" />
-              <h4 className="text-sm font-medium text-gray-700 sm:text-base">
-                {classRank.class?.name}
-              </h4>
-            </div>
-
-            <p className="font-semibold text-purple-600 xs:text-lg sm:font-bold sm:text-xl md:text-2xl lg:text-3xl">
-              {classRank.rank} / {classRank.totalStudents}
-            </p>
-          </div>
-        ))}
-      </Card>
+      {/* School & Clasess stats */}
+      <List
+        items={[
+          {
+            icon: Award,
+            gradientTo: "to-cyan-700",
+            title: "Maktabdagi reyting",
+            gradientFrom: "from-cyan-300",
+            trailing: (
+              <p className="font-semibold text-cyan-600 xs:text-lg sm:font-bold sm:text-xl md:text-2xl">
+                <Counter value={rankings.schoolRank} /> /{" "}
+                <Counter value={rankings.schoolTotalStudents} />
+              </p>
+            ),
+          },
+          ...(rankings?.classRanks.length
+            ? rankings?.classRanks.map((classRank) => ({
+                icon: Users,
+                gradientTo: "to-sky-700",
+                title: `${classRank.class?.name}dagi reyting`,
+                gradientFrom: "from-sky-300",
+                trailing: (
+                  <p className="font-semibold text-sky-600 xs:text-lg sm:font-bold sm:text-xl md:text-2xl">
+                    <Counter value={classRank.rank} /> /{" "}
+                    <Counter value={classRank.totalStudents} />
+                  </p>
+                ),
+              }))
+            : []),
+        ]}
+      />
 
       <Card title="Baholar" className="space-y-4 xs:space-y-5">
         {!simpleStats?.subjects?.length ? (
