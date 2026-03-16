@@ -16,6 +16,7 @@ import magicAnimation from "@/shared/assets/animations/magic.json";
  * @param {"lottie"|"icon"} [props.kind="lottie"] - Type of loader to display.
  * @param {boolean} [props.animated=true] - Whether the icon should be animated (only for "icon" kind).
  * @param {React.Component} [props.icon=Loader] - Icon component to display when kind is "icon".
+ * @param {React.Component} [props.animationData=magicAnimation] - Animation data to display when kind is "lottie".
  * @param {string} [props.title="Yuklanmoqda..."] - Text to display below the loader.
  * @param {object} [props.iconProps={ className: "size-6 text-gray-400" }] - Additional props for the icon component.
  * @returns {JSX.Element}
@@ -26,6 +27,7 @@ const LoaderCard = ({
   animated = true,
   icon: Icon = Loader,
   title = "Yuklanmoqda...",
+  animationData = magicAnimation,
   iconProps = { className: "size-6 text-gray-400" },
   ...props
 }) => {
@@ -39,7 +41,7 @@ const LoaderCard = ({
         )}
         {...props}
       >
-        <Lottie animationData={magicAnimation} className="size-9" />
+        <Lottie animationData={animationData} className="size-9" />
         <p className="text-sm text-gray-500">{title}</p>
       </div>
     );
