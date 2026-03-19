@@ -4,6 +4,9 @@ import { ChevronRight } from "lucide-react";
 // Data
 import { topNavItems } from "../data/nav.data";
 
+// Hooks
+import useTelegram from "@/shared/hooks/useTelegram";
+
 // Components
 import List from "@/shared/components/ui/List";
 import WeeklyStats from "../components/WeeklyStats";
@@ -11,6 +14,9 @@ import StoriesPanel from "../components/StoriesPanel";
 import BottomNavbar from "@/shared/components/ui/BottomNavbar";
 
 const DashboardPage = () => {
+  const { setHeaderColor } = useTelegram();
+  setHeaderColor("#3b82f6 ");
+
   return (
     <div className="min-h-screen pb-28 bg-gray-100 animate__animated animate__fadeIn">
       <div className="container pt-5 space-y-5">
