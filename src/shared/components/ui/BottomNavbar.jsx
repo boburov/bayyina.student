@@ -17,8 +17,9 @@ const BottomNavbar = () => {
 
   return (
     <div className="fixed top-auto inset-0 z-20 flex justify-center pb-4">
-      <div className="container">
-        <nav className="bottom-navigation flex items-center gap-1 p-1 rounded-full bg-white xs:p-1.5">
+      <div className="container relative">
+        {/* Nav */}
+        <nav className="relative z-10 bottom-navigation flex items-center gap-1 p-1 rounded-full bg-white xs:p-1.5">
           {navItems.map((nav) => (
             <NavLink
               to={nav.path}
@@ -53,6 +54,9 @@ const BottomNavbar = () => {
             </NavLink>
           ))}
         </nav>
+
+        {/* Shadow */}
+        <div className="absolute inset-x-0 -bottom-4 z-0 w-full h-10 bg-gradient-to-b from-transparent to-gray-100" />
       </div>
     </div>
   );
