@@ -5,13 +5,13 @@ import { cn } from "../../utils/cn";
 import { NavLink } from "react-router-dom";
 
 // Icons
-import { Home, User, Coins, Store, AlertTriangle } from "lucide-react";
+import { Home, User, Store, ChartNoAxesColumn } from "lucide-react";
 
 const BottomNavbar = () => {
   const navItems = [
     { path: "/dashboard", label: "Asosiy", icon: Home },
     { path: "/market", label: "Do'kon", icon: Store },
-    { path: "/transactions", label: "Tangalar", icon: Coins },
+    { path: "/statistics", label: "Statistika", icon: ChartNoAxesColumn },
     { path: "/profile", label: "Profil", icon: User },
   ];
 
@@ -19,7 +19,7 @@ const BottomNavbar = () => {
     <div className="fixed top-auto inset-0 z-20 flex justify-center pb-4">
       <div className="container relative">
         {/* Nav */}
-        <nav className="relative z-10 bottom-navigation flex items-center gap-1 p-1 rounded-full bg-white xs:p-1.5">
+        <nav className="relative z-10 bottom-navigation flex items-center p-1 rounded-full bg-white/90 backdrop-blur xs:p-1.5">
           {navItems.map((nav) => (
             <NavLink
               to={nav.path}
@@ -43,7 +43,7 @@ const BottomNavbar = () => {
 
                   <span
                     className={cn(
-                      isActive ? "font-bold xs:font-semibold" : "font-medium",
+                      isActive ? "font-bold" : "font-medium",
                       "text-[10px] xs:text-xs",
                     )}
                   >
@@ -56,7 +56,7 @@ const BottomNavbar = () => {
         </nav>
 
         {/* Shadow */}
-        <div className="absolute inset-x-0 -bottom-4 z-0 w-full h-10 bg-gradient-to-b from-transparent to-gray-100" />
+        <div className="absolute inset-x-0 -bottom-4 z-0 w-full h-16 bg-gradient-to-b from-transparent to-gray-100" />
       </div>
     </div>
   );
