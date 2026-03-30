@@ -44,6 +44,10 @@ import MyPenaltiesPage from "@/features/penalties/pages/MyPenaltiesPage";
 import GamePage from "@/features/games/pages/GamePage";
 import GamesPage from "@/features/games/pages/GamesPage";
 
+// Statistics pages
+import StatisticsStatsPage from "@/features/statistics/pages/StatisticsStatsPage";
+import StatisticsScoreboardPage from "@/features/statistics/pages/StatisticsScoreboardPage";
+
 const Routes = () => {
   return (
     <RoutesWrapper>
@@ -63,6 +67,13 @@ const Routes = () => {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/profile/edit" element={<ProfileEditPage />} />
           <Route path="/transactions" element={<TransactionsPage />} />
+
+          {/* Statistics */}
+          <Route path="/statistics" element={<Outlet />}>
+            <Route index element={<Navigate to="/statistics/stats" replace />} />
+            <Route path="stats" element={<StatisticsStatsPage />} />
+            <Route path="scoreboard" element={<StatisticsScoreboardPage />} />
+          </Route>
 
           {/* Penalties */}
           <Route path="/penalties" element={<MyPenaltiesPage />} />
