@@ -98,6 +98,20 @@
   }
 }
 
-.bottom-navigation{
+.bottom-navigation {
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Remove focus outline from Recharts */
+.recharts-wrapper *:focus {
+  outline: none;
+}
+
+.recharts-surface,
+.recharts-layer,
+.recharts-sector,
+.recharts-rectangle,
+.recharts-dot,
+.recharts-curve {
+  outline: none;
 }
