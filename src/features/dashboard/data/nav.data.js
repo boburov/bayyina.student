@@ -1,5 +1,5 @@
 // Icons
-import { Gamepad2, TriangleAlert } from "lucide-react";
+import { Coins, Gamepad2, TriangleAlert } from "lucide-react";
 
 const topNavItems = [
   {
@@ -7,16 +7,24 @@ const topNavItems = [
     label: "Jarimalar",
     description: "Jarimalaringizni ko'rish uchun",
     icon: TriangleAlert,
-    gradientFrom: "from-red-400",
-    gradientTo: "to-red-700",
+    gradientFrom: "from-orange-400",
+    gradientTo: "to-orange-700",
+  },
+  {
+    to: "/transactions",
+    label: "Tangalar",
+    description: "Tanga tranzaksiyalari tarixi",
+    icon: Coins,
+    gradientFrom: "from-amber-400",
+    gradientTo: "to-amber-700",
   },
   {
     to: "/games",
     label: "O'yinlar",
     description: "Aqlingizni chiniqtirish uchun",
     icon: Gamepad2,
-    gradientFrom: "from-orange-400",
-    gradientTo: "to-orange-700",
+    gradientFrom: "from-yellow-400",
+    gradientTo: "to-yellow-700",
   },
 ];
 
