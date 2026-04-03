@@ -40,6 +40,10 @@ import MarketProductDetailPage from "@/features/market/pages/MarketProductDetail
 // Penalties
 import MyPenaltiesPage from "@/features/penalties/pages/MyPenaltiesPage";
 
+// Tasks
+import MyTasksPage from "@/features/tasks/pages/MyTasksPage";
+import TaskDetailPage from "@/features/tasks/pages/TaskDetailPage";
+
 // Game pages
 import GamePage from "@/features/games/pages/GamePage";
 import GamesPage from "@/features/games/pages/GamesPage";
@@ -77,6 +81,10 @@ const Routes = () => {
 
           {/* Penalties */}
           <Route path="/penalties" element={<MyPenaltiesPage />} />
+
+          {/* Tasks */}
+          <Route path="/tasks" element={<MyTasksPage />} />
+          <Route path="/tasks/:taskId" element={<TaskDetailPage />} />
 
           {/* Market */}
           <Route path="/market" element={<Outlet />}>
