@@ -1,5 +1,5 @@
 // Icons
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Mails } from "lucide-react";
 
 // Data
 import { topNavItems } from "../data/nav.data";
@@ -12,6 +12,8 @@ import List from "@/shared/components/ui/List";
 import WeeklyStats from "../components/WeeklyStats";
 import StoriesPanel from "../components/StoriesPanel";
 import BottomNavbar from "@/shared/components/ui/BottomNavbar";
+import Button from "@/shared/components/ui/button/Button";
+import { Link } from "react-router-dom";
 
 const DashboardPage = () => {
   const { setHeaderColor } = useTelegram();
@@ -21,7 +23,18 @@ const DashboardPage = () => {
     <div className="min-h-screen pb-28 bg-gray-100 animate__animated animate__fadeIn">
       <div className="container pt-5 space-y-5">
         {/* Top */}
-        <h1 className="text-primary font-bold text-xl">MBSI School</h1>
+
+        <div className="flex items-center justify-between">
+          <h1 className="text-primary font-bold text-xl">MBSI School</h1>
+
+          {/* Tasks link */}
+          <Link
+            to="/tasks"
+            className="flex items-center justify-center size-11 bg-white rounded-full border"
+          >
+            <Mails strokeWidth={1.5} size={20} />
+          </Link>
+        </div>
 
         {/* Stories Panel */}
         <StoriesPanel />
