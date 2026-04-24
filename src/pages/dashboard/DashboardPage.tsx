@@ -51,14 +51,14 @@ export const DashboardPage = () => {
           </Card>
           <Card className={`p-4 ${!loading && totalDebt > 0 ? 'border-red-200' : ''}`}>
             <TrendingDown className={`w-4 h-4 mb-2 ${!loading && totalDebt > 0 ? 'text-red-500' : 'text-stone-300'}`} />
-            <p className={`text-lg font-bold ${!loading && totalDebt > 0 ? 'text-red-600' : 'text-stone-400'}`}>
+            <p className={`text-sm font-bold leading-tight break-all ${!loading && totalDebt > 0 ? 'text-red-600' : 'text-stone-400'}`}>
               {loading ? '—' : totalDebt > 0 ? fmt(totalDebt) : "Yo'q"}
             </p>
             <p className="text-xs text-stone-500 mt-0.5">Qarzdorlik</p>
           </Card>
           <Card className={`p-4 ${!loading && totalBalance > 0 ? 'border-green-200' : ''}`}>
             <TrendingUp className={`w-4 h-4 mb-2 ${!loading && totalBalance > 0 ? 'text-green-500' : 'text-stone-300'}`} />
-            <p className={`text-lg font-bold ${!loading && totalBalance > 0 ? 'text-green-600' : 'text-stone-400'}`}>
+            <p className={`text-sm font-bold leading-tight break-all ${!loading && totalBalance > 0 ? 'text-green-600' : 'text-stone-400'}`}>
               {loading ? '—' : fmt(totalBalance)}
             </p>
             <p className="text-xs text-stone-500 mt-0.5">Balans</p>
@@ -81,12 +81,12 @@ export const DashboardPage = () => {
                         </p>
                       )}
                     </div>
-                    <div className="text-right">
+                    <div className="text-right max-w-[120px]">
                       {en.debt > 0 && (
-                        <p className="text-xs font-semibold text-red-600">{fmt(en.debt)} qarz</p>
+                        <p className="text-xs font-semibold text-red-600 break-all">{fmt(en.debt)} qarz</p>
                       )}
                       {en.balance > 0 && (
-                        <p className="text-xs font-semibold text-green-600">{fmt(en.balance)} balans</p>
+                        <p className="text-xs font-semibold text-green-600 break-all">{fmt(en.balance)} balans</p>
                       )}
                       {en.nextPaymentDate && (
                         <p className="text-xs text-stone-400 mt-0.5">

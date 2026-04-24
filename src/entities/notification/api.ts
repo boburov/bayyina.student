@@ -10,3 +10,12 @@ export const getNotifications = async (
   })
   return data
 }
+
+export const createNotification = async (payload: {
+  group: string
+  title: string
+  message: string
+  type: string
+}): Promise<void> => {
+  await baseApi.post('/notifications', payload)
+}

@@ -6,6 +6,7 @@ import { DashboardPage } from '../../pages/dashboard/DashboardPage';
 import { ProfilPage } from '../../pages/profil/ProfilPage';
 import { MoliyaPage } from '../../pages/moliya/MoliyaPage';
 import { NotificationsPage } from '../../pages/notifications/NotificationsPage';
+import { CreateLeadsPage } from '../../pages/create-leads/CreateLeadsPage';
 
 const PrivateRoute = ({ children }: { children: ReactElement }) => {
   const { isAuthenticated } = useAuth();
@@ -61,6 +62,7 @@ export const AppRouter = () => {
             </PrivateRoute>
           }
         />
+        <Route path="/create-leads" element={<CreateLeadsPage />} />
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
     </BrowserRouter>

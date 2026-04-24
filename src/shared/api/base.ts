@@ -2,7 +2,7 @@ import axios from 'axios';
 import { storage } from '../lib/storage';
 
 export const baseApi = axios.create({
-  baseURL: 'http://156.67.29.62:4000/api/',
+  baseURL: 'https://api.bayyina.org.uz/api/',
   headers: {
     'Content-Type': 'application/json',
   },

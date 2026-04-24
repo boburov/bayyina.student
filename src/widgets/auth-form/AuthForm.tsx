@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GraduationCap, Phone, AlertCircle } from 'lucide-react';
+import { Phone, AlertCircle } from 'lucide-react';
 import { useLogin } from '../../features/auth/model/useLogin';
 import { PasswordInput } from '../../features/auth/ui/PasswordInput';
 import { useAuth } from '../../app/providers/AuthProvider';
@@ -29,9 +29,7 @@ export const AuthForm = () => {
   return (
     <div className="w-full max-w-sm border border-stone-200 bg-white px-8 py-10">
       <div className="flex flex-col items-center mb-8">
-        <div className="w-10 h-10 bg-brown-600 flex items-center justify-center mb-4">
-          <GraduationCap className="w-5 h-5 text-white" />
-        </div>
+        <img src="/favicon.png" alt="Bayyina" className="w-12 h-12 object-contain mb-4" />
         <h1 className="text-xl font-semibold text-stone-900">Bayyina</h1>
         <p className="text-sm text-stone-500 mt-1">Talaba paneli</p>
       </div>
