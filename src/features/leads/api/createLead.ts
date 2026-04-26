@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { baseApi } from '../../../shared/api/base';
 
 export interface LeadPayload {
   firstName: string;
@@ -11,7 +11,5 @@ export interface LeadPayload {
 }
 
 export const createLead = async (data: LeadPayload): Promise<void> => {
-  await axios.post('http://api.bayyina.org.uz/api/leads', data, {
-    headers: { 'Content-Type': 'application/json' },
-  });
+  await baseApi.post('/leads', data);
 };
