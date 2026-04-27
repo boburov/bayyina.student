@@ -1,45 +1,45 @@
-import { useState }              from 'react'
+import { useState } from 'react'
 import {
   Bell, ChevronLeft, ChevronRight,
   MessageSquare, Plus, Send, User, X,
 } from 'lucide-react'
-import { useNotifications }      from '../../entities/notification/useNotifications'
-import { createNotification }    from '../../entities/notification/api'
-import { useEnrollments }        from '../../entities/enrollment/useEnrollments'
-import type { Notification }     from '../../entities/notification/model'
-import { Card }                  from '../../shared/ui/Card'
-import { BottomNav }             from '../../widgets/bottom-nav/BottomNav'
+import { useNotifications } from '../../entities/notification/useNotifications'
+import { createNotification } from '../../entities/notification/api'
+import { useEnrollments } from '../../entities/enrollment/useEnrollments'
+import type { Notification } from '../../entities/notification/model'
+import { Card } from '../../shared/ui/Card'
+import { BottomNav } from '../../widgets/bottom-nav/BottomNav'
 
 // ─── Static maps ──────────────────────────────────────────────────────────────
 
 const typeLabel: Record<string, string> = {
-  complaint:  'Shikoyat',
+  complaint: 'Shikoyat',
   suggestion: 'Taklif',
-  info:       "Ma'lumot",
-  request:    "So'rov",
+  info: "Ma'lumot",
+  request: "So'rov",
 }
 
 const typeOptions = [
-  { value: 'complaint',  label: 'Shikoyat'  },
-  { value: 'suggestion', label: 'Taklif'    },
-  { value: 'info',       label: "Ma'lumot"  },
-  { value: 'request',    label: "So'rov"    },
+  { value: 'complaint', label: 'Shikoyat' },
+  { value: 'suggestion', label: 'Taklif' },
+  { value: 'info', label: "Ma'lumot" },
+  { value: 'request', label: "So'rov" },
 ]
 
 const statusCls: Record<string, string> = {
-  open:        'bg-amber-50 text-amber-700 border border-amber-200',
+  open: 'bg-amber-50 text-amber-700 border border-amber-200',
   in_progress: 'bg-blue-50 text-blue-700 border border-blue-200',
-  resolved:    'bg-green-50 text-green-700 border border-green-200',
-  closed:      'bg-stone-100 text-stone-500 border border-stone-200',
-  pending:     'bg-stone-100 text-stone-500 border border-stone-200',
+  resolved: 'bg-green-50 text-green-700 border border-green-200',
+  closed: 'bg-stone-100 text-stone-500 border border-stone-200',
+  pending: 'bg-stone-100 text-stone-500 border border-stone-200',
 }
 
 const statusText: Record<string, string> = {
-  open:        'Ochiq',
+  open: 'Ochiq',
   in_progress: 'Jarayonda',
-  resolved:    'Hal qilindi',
-  closed:      'Yopiq',
-  pending:     'Kutilmoqda',
+  resolved: 'Hal qilindi',
+  closed: 'Yopiq',
+  pending: 'Kutilmoqda',
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -128,20 +128,20 @@ function DetailSheet({ n, onClose }: { n: Notification; onClose: () => void }) {
 // ─── Create form ──────────────────────────────────────────────────────────────
 
 interface CreateFormProps {
-  onClose:  () => void
+  onClose: () => void
   onSubmit: () => void
 }
 
 function CreateForm({ onClose, onSubmit }: CreateFormProps) {
   const { enrollments } = useEnrollments()
-  const activeGroups    = enrollments.filter((e) => e.status === 'active' && e.group != null)
+  const activeGroups = enrollments.filter((e) => e.status === 'active' && e.group != null)
 
-  const [title,   setTitle]   = useState('')
+  const [title, setTitle] = useState('')
   const [message, setMessage] = useState('')
-  const [type,    setType]    = useState('complaint')
-  const [group,   setGroup]   = useState('')
+  const [type, setType] = useState('complaint')
+  const [group, setGroup] = useState('')
   const [sending, setSending] = useState(false)
-  const [error,   setError]   = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -258,8 +258,8 @@ export const NotificationsPage = () => {
     page, totalPages, hasNextPage, hasPrevPage, goToPage, refresh,
   } = useNotifications()
 
-  const [selected,    setSelected]    = useState<Notification | null>(null)
-  const [showCreate,  setShowCreate]  = useState(false)
+  const [selected, setSelected] = useState<Notification | null>(null)
+  const [showCreate, setShowCreate] = useState(false)
 
   const handleCreated = () => {
     setShowCreate(false)
@@ -277,7 +277,7 @@ export const NotificationsPage = () => {
             className="flex items-center gap-1.5 px-3 h-8 border border-stone-200 text-xs font-medium text-stone-600 hover:bg-stone-50 transition-colors"
           >
             <Plus size={13} />
-            Xabar yuborish
+            Murojat Yuborish
           </button>
         </div>
 
@@ -305,7 +305,7 @@ export const NotificationsPage = () => {
         {!loading && !error && notifications.length === 0 && (
           <Card className="p-8 flex flex-col items-center gap-2">
             <Bell size={28} className="text-stone-300" strokeWidth={1.5} />
-            <p className="text-sm text-stone-400">Xabarnomalar yo'q</p>
+            <p className="text-sm text-stone-400">Murojatlar mavjud emas</p>
           </Card>
         )}
 

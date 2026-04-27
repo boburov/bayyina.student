@@ -4,7 +4,7 @@ import { Home, User, Wallet, Bell } from 'lucide-react';
 const navItems = [
   { to: '/dashboard',     label: 'Bosh sahifa',  icon: Home  },
   { to: '/moliya',        label: 'Moliya',        icon: Wallet },
-  { to: '/notifications', label: 'Xabarnomalar', icon: Bell  },
+  { to: '/requests', label: 'Murojatlar', icon: Bell  },
   { to: '/profil',        label: 'Profil',        icon: User  },
 ];
 

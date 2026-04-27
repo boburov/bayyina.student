@@ -55,7 +55,7 @@ export const AppRouter = () => {
           }
         />
         <Route
-          path="/notifications"
+          path="/requests"
           element={
             <PrivateRoute>
               <NotificationsPage />
