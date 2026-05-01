@@ -7,6 +7,7 @@ import { ProfilPage } from '../../pages/profil/ProfilPage';
 import { MoliyaPage } from '../../pages/moliya/MoliyaPage';
 import { NotificationsPage } from '../../pages/notifications/NotificationsPage';
 import { CreateLeadsPage } from '../../pages/create-leads/CreateLeadsPage';
+import { ReytingPage } from '../../pages/reyting/ReytingPage';
 
 const PrivateRoute = ({ children }: { children: ReactElement }) => {
   const { isAuthenticated } = useAuth();
@@ -59,6 +60,14 @@ export const AppRouter = () => {
           element={
             <PrivateRoute>
               <NotificationsPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/reyting"
+          element={
+            <PrivateRoute>
+              <ReytingPage />
             </PrivateRoute>
           }
         />
