@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import { forwardRef, useRef, useCallback } from 'react'
 import type { InputHTMLAttributes } from 'react'
 import { cn } from '../lib/cn'
 
@@ -6,16 +6,15 @@ function digitsOnly(value: string): string {
   return value.replace(/\D/g, '')
 }
 
-/** +998 (90) 123-45-67 */
-export function applyPhoneMask(raw: string): string {
-  const d = digitsOnly(raw)
-  const n = (d.startsWith('998') ? d.slice(3) : d.startsWith('0') ? d.slice(1) : d).slice(0, 9)
-
-  if (n.length === 0) return ''
-  if (n.length <= 2) return `+998 (${n}`
-  if (n.length <= 5) return `+998 (${n.slice(0, 2)}) ${n.slice(2)}`
-  if (n.length <= 7) return `+998 (${n.slice(0, 2)}) ${n.slice(2, 5)}-${n.slice(5)}`
-  return `+998 (${n.slice(0, 2)}) ${n.slice(2, 5)}-${n.slice(5, 7)}-${n.slice(7)}`
+function applyMask(digits: string): string {
+  const d = digits.slice(0, 12)
+  let r = '+'
+  if (d.length > 0)  r += d.slice(0, 3)
+  if (d.length > 3)  r += ` (${d.slice(3, 5)}`
+  if (d.length > 5)  r += `) ${d.slice(5, 8)}`
+  if (d.length > 8)  r += `-${d.slice(8, 10)}`
+  if (d.length > 10) r += `-${d.slice(10, 12)}`
+  return r
 }
 
 /** Returns only 9 local digits (no country code) */
@@ -33,20 +32,25 @@ interface InputTelProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onC
 
 export const InputTel = forwardRef<HTMLInputElement, InputTelProps>(
   ({ value = '', onChange, label, error, className = '', id, ...props }, ref) => {
-    const inputId = id ?? label?.toLowerCase().replace(/\s+/g, '-') ?? 'phone'
+    const inputId  = id ?? label?.toLowerCase().replace(/\s+/g, '-') ?? 'phone'
+    const innerRef = useRef<HTMLInputElement>(null)
+    const resolvedRef = (ref as React.RefObject<HTMLInputElement>) ?? innerRef
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      onChange?.(applyPhoneMask(e.target.value))
-    }
+    const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+      const raw = digitsOnly(e.target.value).slice(0, 12)
+      onChange?.(raw.length > 0 ? applyMask(raw) : '')
+    }, [onChange])
 
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-      const allowed =
-        /^[0-9]$/.test(e.key) ||
-        ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab', 'Home', 'End'].includes(e.key)
-      if (!allowed && !e.metaKey && !e.ctrlKey) {
+    const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === 'Backspace') {
         e.preventDefault()
+        const raw = digitsOnly(e.currentTarget.value)
+        if (raw.length > 0) {
+          const trimmed = raw.slice(0, -1)
+          onChange?.(trimmed.length > 0 ? applyMask(trimmed) : '')
+        }
       }
-    }
+    }, [onChange])
 
     return (
       <div className="flex flex-col gap-1.5">
@@ -56,7 +60,7 @@ export const InputTel = forwardRef<HTMLInputElement, InputTelProps>(
           </label>
         )}
         <input
-          ref={ref}
+          ref={resolvedRef}
           id={inputId}
           type="tel"
           inputMode="numeric"
@@ -64,7 +68,7 @@ export const InputTel = forwardRef<HTMLInputElement, InputTelProps>(
           value={value}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
-          placeholder="+998 (XX) XXX-XX-XX"
+          placeholder="+998 (__) ___-__-__"
           className={cn(
             'w-full h-10 rounded-sm border bg-white px-3 text-sm text-stone-900',
             'placeholder:text-stone-400 outline-none',

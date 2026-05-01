@@ -6,9 +6,9 @@ import { useEnrollments } from '../../entities/enrollment/useEnrollments';
 import { Card } from '../../shared/ui/Card';
 import { Button } from '../../shared/ui/Button';
 import { BottomNav } from '../../widgets/bottom-nav/BottomNav';
+import { formatMoney, formatPhone } from '../../shared/lib/formatNumber';
 
-const fmt = (n: number | null | undefined) =>
-  (n ?? 0).toLocaleString('uz-UZ') + " so'm";
+const fmt = formatMoney;
 
 const statusLabel: Record<string, { text: string; cls: string }> = {
   active:    { text: 'Faol',             cls: 'bg-green-50 text-green-700 border border-green-200' },
@@ -50,7 +50,7 @@ export const ProfilPage = () => {
               ) : profile ? (
                 <>
                   <p className="text-sm font-semibold text-stone-900">{profile.firstName} {profile.lastName}</p>
-                  <p className="text-xs text-stone-400 mt-0.5">{profile.phone}</p>
+                  <p className="text-xs text-stone-400 mt-0.5">{formatPhone(profile.phone)}</p>
                   {profile.gender && (
                     <p className="text-xs text-stone-400">
                       {profile.gender === 'male' ? 'Erkak' : 'Ayol'}{profile.age ? `, ${profile.age} yosh` : ''}

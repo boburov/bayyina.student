@@ -2,8 +2,9 @@ import { useEnrollments } from '../../entities/enrollment/useEnrollments';
 import { usePayments } from '../../entities/payment/usePayments';
 import { Card } from '../../shared/ui/Card';
 import { BottomNav } from '../../widgets/bottom-nav/BottomNav';
+import { formatMoney } from '../../shared/lib/formatNumber';
 
-const fmt = (n: number | null | undefined) => (n ?? 0).toLocaleString('uz-UZ') + " so'm";
+const fmt = formatMoney;
 
 const paymentStatusLabel: Record<string, { text: string; cls: string }> = {
   paid:    { text: "To'landi",       cls: 'text-green-600 bg-green-50 border border-green-200' },

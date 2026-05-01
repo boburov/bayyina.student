@@ -3,8 +3,9 @@ import { useProfile } from '../../features/auth/model/useProfile';
 import { useEnrollments } from '../../entities/enrollment/useEnrollments';
 import { Card } from '../../shared/ui/Card';
 import { BottomNav } from '../../widgets/bottom-nav/BottomNav';
+import { formatMoney } from '../../shared/lib/formatNumber';
 
-const fmt = (n: number | null | undefined) => (n ?? 0).toLocaleString('uz-UZ') + " so'm";
+const fmt = formatMoney;
 
 export const DashboardPage = () => {
   const { profile } = useProfile();
