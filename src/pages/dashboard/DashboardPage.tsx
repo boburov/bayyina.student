@@ -71,29 +71,46 @@ export const DashboardPage = () => {
             <p className="text-xs font-semibold text-stone-400 uppercase tracking-wider mb-3">Guruhlarim</p>
             <div className="flex flex-col gap-2">
               {valid.map((en) => (
-                <Card key={en._id} className="p-4">
+                <Card
+                  key={en._id}
+                  className={`p-4 ${en.status === 'completed' ? 'border-green-200 bg-green-50/30' : en.status === 'dropped' ? 'border-stone-200 bg-stone-50/50 opacity-60' : ''}`}
+                >
                   <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm font-medium text-stone-900">{en.group.name}</p>
+                    <div className="min-w-0 flex-1 mr-3">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <p className="text-sm font-medium text-stone-900">{en.group.name}</p>
+                        {en.status === 'completed' && (
+                          <span className="shrink-0 text-[10px] font-semibold px-1.5 py-0.5 rounded-full bg-green-100 text-green-700">
+                            Tugallangan
+                          </span>
+                        )}
+                        {en.status === 'dropped' && (
+                          <span className="shrink-0 text-[10px] font-semibold px-1.5 py-0.5 rounded-full bg-stone-200 text-stone-500">
+                            Tashlab ketilgan
+                          </span>
+                        )}
+                      </div>
                       {en.group.schedule && (
                         <p className="text-xs text-stone-400 mt-0.5">
                           {en.group.schedule.days?.join(', ')} · {en.group.schedule.time}
                         </p>
                       )}
                     </div>
-                    <div className="text-right max-w-[120px]">
-                      {en.debt > 0 && (
-                        <p className="text-xs font-semibold text-red-600 break-all">{fmt(en.debt)} qarz</p>
-                      )}
-                      {en.balance > 0 && (
-                        <p className="text-xs font-semibold text-green-600 break-all">{fmt(en.balance)} balans</p>
-                      )}
-                      {en.nextPaymentDate && (
-                        <p className="text-xs text-stone-400 mt-0.5">
-                          {new Date(en.nextPaymentDate).toLocaleDateString('uz-UZ', { day: '2-digit', month: '2-digit' })} da to'lov
-                        </p>
-                      )}
-                    </div>
+                    {en.status === 'active' && (
+                      <div className="text-right max-w-[120px]">
+                        {en.debt > 0 && (
+                          <p className="text-xs font-semibold text-red-600 break-all">{fmt(en.debt)} qarz</p>
+                        )}
+                        {en.balance > 0 && (
+                          <p className="text-xs font-semibold text-green-600 break-all">{fmt(en.balance)} balans</p>
+                        )}
+                        {en.nextPaymentDate && (
+                          <p className="text-xs text-stone-400 mt-0.5">
+                            {new Date(en.nextPaymentDate).toLocaleDateString('uz-UZ', { day: '2-digit', month: '2-digit' })} da to'lov
+                          </p>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </Card>
               ))}
