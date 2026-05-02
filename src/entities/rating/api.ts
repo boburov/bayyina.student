@@ -4,8 +4,7 @@ export interface MyDerStats {
   totalPresent:  number
   totalAbsent:   number
   totalSessions: number
-  avgStars:      number | null
-  score:         number
+  avgGrade:      number | null
   rankGlobal:    number | null
   totalGlobal:   number
   groupRanks:    Record<string, { rank: number; total: number }>

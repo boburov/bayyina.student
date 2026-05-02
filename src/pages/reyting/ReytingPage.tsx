@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Trophy, Star, TrendingUp, Calendar } from 'lucide-react';
+import { Trophy, TrendingUp, Calendar, BookOpen } from 'lucide-react';
 import { fetchMyDerStats } from '../../entities/rating/api';
 import type { MyDerStats } from '../../entities/rating/api';
 import { Card } from '../../shared/ui/Card';
@@ -23,23 +23,19 @@ function fromDays(n: number): string {
   return toDateStr(d);
 }
 
-function StarRow({ avg }: { avg: number | null }) {
+function GradeRow({ avg }: { avg: number | null }) {
   if (avg == null) {
     return <span className="text-stone-300 text-sm">Hali baho yo'q</span>;
   }
-  const filled = Math.round(avg);
+  const color =
+    avg >= 4.5 ? 'text-emerald-600' :
+    avg >= 3.5 ? 'text-blue-600' :
+    avg >= 2.5 ? 'text-amber-600' :
+    'text-rose-600';
   return (
-    <div className="flex items-center gap-1.5">
-      <div className="flex">
-        {[1,2,3,4,5].map((s) => (
-          <Star
-            key={s}
-            className={`w-5 h-5 ${s <= filled ? 'text-amber-400 fill-amber-400' : 'text-stone-200'}`}
-            strokeWidth={1}
-          />
-        ))}
-      </div>
-      <span className="text-stone-600 text-sm font-medium">{avg.toFixed(1)} / 5.0</span>
+    <div className="flex items-center gap-2">
+      <span className={`text-3xl font-bold ${color}`}>{avg.toFixed(1)}</span>
+      <span className="text-stone-400 text-sm">o'rtacha baho</span>
     </div>
   );
 }
@@ -132,20 +128,12 @@ export const ReytingPage = () => {
                 <TrendingUp className="w-4 h-4 text-brown-600" />
                 <p className="text-xs font-semibold text-stone-500 uppercase tracking-wide">Umumiy reyting</p>
               </div>
-              <div className="flex items-end justify-between">
-                <div>
-                  <p className="text-3xl font-bold text-stone-900">
-                    {stats.rankGlobal != null ? `#${stats.rankGlobal}` : '—'}
-                  </p>
-                  <p className="text-xs text-stone-400 mt-0.5">
-                    {stats.totalGlobal} ta o'quvchi ichida
-                  </p>
-                </div>
-                <div className="text-right">
-                  <p className="text-2xl font-bold text-amber-500">{stats.score}</p>
-                  <p className="text-xs text-stone-400">ball</p>
-                </div>
-              </div>
+              <p className="text-3xl font-bold text-stone-900">
+                {stats.rankGlobal != null ? `#${stats.rankGlobal}` : '—'}
+              </p>
+              <p className="text-xs text-stone-400 mt-0.5">
+                {stats.totalGlobal} ta o'quvchi ichida
+              </p>
             </Card>
 
             {/* Attendance */}
@@ -160,13 +148,13 @@ export const ReytingPage = () => {
               )}
             </Card>
 
-            {/* Stars */}
+            {/* Grade */}
             <Card className="p-4">
               <div className="flex items-center gap-2 mb-3">
-                <Star className="w-4 h-4 text-amber-400" />
-                <p className="text-xs font-semibold text-stone-500 uppercase tracking-wide">O'rtacha faollik</p>
+                <BookOpen className="w-4 h-4 text-blue-500" />
+                <p className="text-xs font-semibold text-stone-500 uppercase tracking-wide">Baho</p>
               </div>
-              <StarRow avg={stats.avgStars} />
+              <GradeRow avg={stats.avgGrade} />
             </Card>
 
             {/* Group ranks */}
